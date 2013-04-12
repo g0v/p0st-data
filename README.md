@@ -27,3 +27,11 @@
     piconv -f big5 -t utf8 CE_Rd_St_H_10202.TXT > CE_Rd_St_H_10202_u.TXT
     mv -f CE_Rd_St_H_10202_u.TXT CE_Rd_St_H_10202.TXT
     rm CE_Rd_St_H_10202.zip
+
+- [全國營業據點](http://download.post.gov.tw/post/download/Post_All_1020328.txt)
+
+    curl http://download.post.gov.tw/post/download/Post_All_1020328.txt | piconv -f big5 -t utf8 | perl -ple 's/(\x{d})+//' > Post_All_1020328.txt
+
+- [全國郵局ATM分佈](http://download.post.gov.tw/post/download/post_atm_location.csv)
+
+    curl http://download.post.gov.tw/post/download/post_atm_location.csv | piconv -f big5 -t utf8 > post_atm_location.csv
