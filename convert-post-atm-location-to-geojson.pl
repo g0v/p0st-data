@@ -16,8 +16,6 @@ my $csv = Parse::CSV->new(
 );
 
 while (my $row = $csv->fetch) {
-    my $label = join ",", uniq grep { $_ } @{$row}{"position", "x1", "x2", "x3", "x4"};
-
     push @{$geo->{features}}, {
         type => "Feature",
         geometry => {
@@ -25,9 +23,11 @@ while (my $row = $csv->fetch) {
             coordinates => [ $row->{longitude}, $row->{latitude} ]
         },
         properties => {
-            'marker-symbol' => $label,
+            'marker-symbol' => "bank",
+            'marker-size' => 'small',
             name => $row->{description},
-            address => "$row->{city} $row->{district} $row->{addr}"
+            address => "$row->{city} $row->{district} $row->{addr}",
+            machines => join(",", uniq grep { $_ } @{$row}{"position", "x1", "x2", "x3", "x4"}),
         }
     };
     ;
